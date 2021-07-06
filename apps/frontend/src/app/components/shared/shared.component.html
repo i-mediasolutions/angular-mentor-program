@@ -1,4 +1,15 @@
-<h1>{{ vm.title }}</h1>
-<p>{{ vm.text }}</p>
-<input [(ngModel)]="value" type="text" [placeholder]='vm.placeholder' />
-<button (click)="onBtnClick()">{{ vm.btnCaption }}</button>
+<div nz-row>
+  <div nz-col nzSpan="12" nzOffset="6" style="margin-top: 20%">
+    <h3>{{vm.title}}</h3>
+    <p>{{vm.description}}</p>
+    <nz-input-group [nzPrefix]="prefixTemplateUser">
+      <input [(ngModel)]="value" type="text" nz-input placeholder="Enter your email" />
+    </nz-input-group>
+    <ng-template #prefixTemplateUser><i nz-icon nzType="mail"></i></ng-template>
+    <button (click)="onBtnClick()" [disabled]="!value"
+            class="mt-3 d-block" nz-button nzType="primary" nzSize="large" nzShape="round">
+      Send
+    </button>
+
+  </div>
+</div>
