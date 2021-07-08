@@ -3,8 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { PasswordComponent } from './password/password.component';
 import { FindComponent } from './find/find.component';
 import { HomeComponent } from './components/home/home.component';
-import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component"; // CLI imports router
+import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import { LazyLoadedComponent } from './lazy-loaded-module/lazy-loaded-component/lazy-loaded.component';
 
+// CLI imports router
 const routes: Routes = [
   {
     path: '',
@@ -17,6 +19,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'ngrx',
+    component: LazyLoadedComponent
   },
   {
     path: '**',

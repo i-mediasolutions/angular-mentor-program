@@ -17,8 +17,14 @@ import en from "@angular/common/locales/en";
 import { HttpClientModule } from "@angular/common/http";
 
 import { DemoNgZorroAntdModule } from "./ng-zorro-antd.module";
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { effects, initialState, metaReducers, reducers } from './app.state';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { LazyLoadedModule } from "./lazy-loaded-module/lazy-loaded.module";
 
 registerLocaleData(en);
+
 
 @NgModule({
   declarations: [
@@ -38,7 +44,30 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     DemoNgZorroAntdModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LazyLoadedModule,
+
+    // add NgRx
+    StoreModule.forRoot(reducers, {
+      initialState,
+      metaReducers,
+      runtimeChecks: {
+        strictActionImmutability: true,
+        strictActionSerializability: true,
+        strictActionTypeUniqueness: true,
+        strictActionWithinNgZone: true,
+        strictStateImmutability: true,
+        strictStateSerializability: true,
+      },
+    }),
+
+    // add global effect
+    EffectsModule.forRoot([...effects]),
+
+    // enable Redux devtools in Chrome
+    StoreDevtoolsModule.instrument({maxAge: 250})
+
+
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
